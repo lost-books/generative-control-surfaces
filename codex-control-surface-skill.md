@@ -1,7 +1,8 @@
 ---
-Author: Codex GPT-6 Astra
-Name: generative-control-surface
-Description: Create a shared workbench for an ongoing AI task: generate useful controls, connect them to retained task state, and carry decisions back into the work. Invoke with CONTROL SURFACE or Generative Control Surface(s). Works with available chat, artifact, or workspace capabilities; Codex is optional. Use for directing ongoing work, not merely illustrating an answer.
+name: generative-control-surface
+description: "Create a shared workbench for an ongoing AI task: generate useful controls, connect them to retained task state, and carry decisions back into the work. Invoke with CONTROL SURFACE or Generative Control Surface(s). Works with available chat, artifact, or workspace capabilities; Codex is optional. Use for directing ongoing work, not merely illustrating an answer."
+metadata:
+  author: Codex GPT-6 Astra
 ---
 
 # Generative Control Surface
@@ -20,15 +21,15 @@ Use familiar controls and plain labels. Keep relevant information near the contr
 
 ## Establish the connection
 
-Check the environment's actual capabilities before building. Prefer an existing task connection or supported artifact runtime. Verify that it can return input to the system; rendering HTML or running JavaScript does not establish that connection.
+Check the environment's actual capabilities before building. Prefer an existing task connection or supported artifact runtime. Test rendering, input submission, state retrieval, and updates separately; success or failure in one does not establish the others. A failed approach is evidence about that approach, not proof that the host cannot support a control surface.
 
 Use the smallest supported path:
 
 - Host integration: connect through documented rendering, storage, and submission tools that are actually available.
 - Local workspace: use a local page and a small state service when filesystem access and process execution are available. See the local pattern below.
-- Manual exchange: when automatic exchange is unavailable, provide structured export/import with a visible submission ID and revision. Demonstrate the complete exchange, including the returned acknowledgment.
+- Graphical file with manual exchange: when automatic exchange is unavailable, create an interactive page or artifact that exports structured decisions with a submission ID and revision. Import them into the task and return an updated artifact or acknowledgment. Demonstrate the complete exchange and label it as manual.
 
-If graphical interfaces cannot run, provide a compact decision table with stable IDs and an exportable state snapshot. Clearly identify it as a text fallback. Do not claim the requested graphical interface was built.
+Every successful use of this skill produces a graphical interface with working controls. If the first path fails, inspect adjacent host mechanisms and test a minimal round trip through each plausible path before declaring the task blocked. Report the specific paths tested and their failures if no graphical route works. Do not substitute a text table for the requested surface.
 
 A shared conversation does not establish shared storage or simultaneous editing. Do not assume Codex, a docked panel, or a particular API exists in another host.
 
@@ -70,7 +71,7 @@ Test the actual chosen path with isolated records and harmless actions. Use brow
 | Execution | Process a harmless submitted action, then present it again. A result appears only after execution, and completed work is not repeated. |
 | Failure | Break the connection or supply invalid input. Failure is visible, accepted state remains intact, and recoverable edits are retained. |
 
-Record pass, fail, not tested, or not applicable, with brief evidence and the tested version. Execution tests may be inapplicable when there are no execution controls. For text fallback, test ID-based edits and snapshot reconstruction. For claimed simultaneous collaboration, test separate participant contexts against the same record.
+Record pass, fail, not tested, or not applicable, with brief evidence and the tested version. Execution tests may be inapplicable when there are no execution controls. For claimed simultaneous collaboration, test separate participant contexts against the same record.
 
 Fix failed capabilities or disable and label them before handover. Never count an unavailable test as a pass. After later changes, rerun affected tests rather than the entire suite for cosmetic edits. Remove only isolated test records.
 
