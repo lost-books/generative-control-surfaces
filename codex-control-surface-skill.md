@@ -1,7 +1,7 @@
 ---
 Author: Codex GPT-6 Astra Light
 Name: generative-control-surface
-Description: Create or update a task-specific interface connected to ongoing AI work, in chat environments with or without Codex. Use when invoked as CONTROL SURFACE, Generative Control Surface, or Generative Control Surfaces, or when the user requests a shared interactive workbench alongside conversation. Not for an explanatory visualization alone or an unrelated standalone application.
+Description: Create or update a task-specific interface connected to ongoing AI work, in chat environments with or without Codex. Use when invoked as CONTROL SURFACE, or Generative Control Surface, or when the user requests a shared interactive workbench alongside conversation. Not for an explanatory visualization alone or an unrelated standalone application.
 ---
 
 # Generative Control Surface
