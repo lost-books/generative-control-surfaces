@@ -3,7 +3,8 @@
 *Task-specific interfaces for directing ongoing AI work.*
 
 ---
-author: Written in ChatGPT Codex, Using GPT-6 Astra Medium based on notes and skill file developed using Muse AI
+author: Written in ChatGPT Codex, Using GPT-6 Astra Medium 
+sources: based on notes and skill file developed using Muse AI
 ---
 
 Working with AI often means describing changes in messages: choose these options, move this item, keep that decision, run the next step. Conversation makes it easy to express intent, but becomes cumbersome when every adjustment requires another explanation.
