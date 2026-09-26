@@ -1,66 +1,79 @@
 ---
-Author: Codex GPT-6 Astra Light
+Author: Codex GPT-6 Astra Medium
 Name: generative-control-surface
-Description: Create or update a task-specific interface connected to ongoing AI work, in chat environments with or without Codex. Use when invoked as CONTROL SURFACE, or Generative Control Surface, or when the user requests a shared interactive workbench alongside conversation. Not for an explanatory visualization alone or an unrelated standalone application.
+Description: Create a shared workbench for an ongoing AI task: generate useful controls, connect them to retained task state, and carry decisions back into the work. Invoke with CONTROL SURFACE or Generative Control Surface(s). Works with available chat, artifact, or workspace capabilities; Codex is optional. Use for directing ongoing work, not merely illustrating an answer.
 ---
 
 # Generative Control Surface
 
-Give ongoing work a small interface: a place to inspect information, change decisions, and direct what happens next while conversation continues. The system can revise the interface as needs change, while retaining the work behind it.
+Create a small interface that lets a person work directly with an ongoing task while continuing the conversation. Changes made through the interface must become available to the system through a clear, tested path. Conversation can also change the interface itself.
 
-Invocation examples: “CONTROL SURFACE for this task” or “Generative Control Surface: compare these options.” Use the current conversation to determine the task. Ask one focused question only if the intended work cannot be inferred.
+The aim is less repeated explanation and more visible control. Build only what the current task needs. Preserve the work when the interface changes.
 
-## Build around the work
+## Start from the current task
 
-Identify what would be easier to inspect or manipulate through controls. Generate the smallest useful interface for that purpose, using existing task records where available. Do not create a second competing source of truth or a dashboard merely to display activity.
+Treat “CONTROL SURFACE” and “Generative Control Surface” (including the plural) as invocations. Infer the purpose from the conversation and existing task records. Ask one focused question only when the intended task cannot be inferred.
 
-Keep task data separate from presentation in a task-specific workspace folder. Record stable item identities, revisions, user decisions, and any results needed to continue. Preserve existing records when changing the layout or reopening the surface. State explicitly which persistence boundary is supported; a file surviving does not mean a server remains running.
+Identify the decisions or adjustments the surface should support and what happens after submission. Generate a usable first version rather than stopping at a design proposal. Reuse an existing surface when it already serves the task.
 
-Use plain labels and visible feedback. Distinguish unsaved edits, saved or submitted decisions, and work actually completed. Include only states relevant to the task. Sorting, filtering, selection, and other routine interactions should not require model calls. Batch changes when useful.
+Use familiar controls and plain labels. Keep relevant information near the controls it informs. Keep established decisions available without repeatedly presenting them as unresolved work. Prefer a surface that remains accessible alongside conversation when the host supports it.
 
-## Choose the available connection
+## Establish the connection
 
-Check what the current environment can actually render, retain, and exchange. Use the simplest working path. Do not assume APIs from another platform are available.
+Check the environment's actual capabilities before building. Prefer an existing task connection or supported artifact runtime. Verify that it can return input to the system; rendering HTML or running JavaScript does not establish that connection.
 
-- Host-supported artifacts or widgets: use the available documented tools for rendering, storage, submissions, and updates. Verify each needed capability separately. A normal browser page does not automatically have access to widget hooks.
-- Local workspace and browser: use a small local page and shared state service, following the optional local pattern below.
-- Chat with generated attachments but no live connection: provide an interactive file with structured export/import. Import submitted records into the ongoing task and return an updated file or acknowledgment. Label the exchange as manual.
-- Text-only chat: provide a compact numbered decision table and accept choices by stable ID. Return a structured state snapshot for reuse. Describe this as a text fallback, not a functioning graphical interface or durable external storage.
+Use the smallest supported path:
 
-A shared chat or shared link does not by itself establish shared storage, participant permissions, or synchronized edits. Claim collaborative behavior only when the host supports it and it has been verified. Otherwise use explicit submitted snapshots and reconcile conflicting revisions.
+- Host integration: connect through documented rendering, storage, and submission tools that are actually available.
+- Local workspace: use a local page and a small state service when filesystem access and process execution are available. See the local pattern below.
+- Manual exchange: when automatic exchange is unavailable, provide structured export/import with a visible submission ID and revision. Demonstrate the complete exchange, including the returned acknowledgment.
 
-Saving input does not necessarily start a system turn. State the actual behavior in the surface. When work resumes, read pending submissions, perform authorized task work, and record acknowledgments or results. Track submission identities so completed work is not repeated. Never label a pending submission “applied.” If automatic execution is requested, use an available execution connection and test it separately.
+If graphical interfaces cannot run, provide a compact decision table with stable IDs and an exportable state snapshot. Clearly identify it as a text fallback. Do not claim the requested graphical interface was built.
 
-## Optional local pattern, including Codex
+A shared conversation does not establish shared storage or simultaneous editing. Do not assume Codex, a docked panel, or a particular API exists in another host.
 
-Use this only where filesystem access, local execution, and a browser are available. It requires a running local service; opening a shared chat elsewhere does not make that service accessible.
+## Keep the work consistent
 
-Serve the interface and JSON state endpoints from the same loopback origin, bound to `127.0.0.1`. Serve only the surface's files, validate write requests and their origin, and expose no arbitrary file access or command execution.
+Use existing authoritative task records where possible. Otherwise establish a structured record separate from the layout. Include only what is needed: stable item IDs, a state revision, decisions, submission IDs, and outcomes. Store it outside the transcript when supported; otherwise make the snapshot portable and explain its retention limits.
 
-Give browser and system updates the same revision-checked write path. Reject stale writes with a visible message while preserving unsaved edits. Use atomic file replacement and serialize read-modify-write operations; do not let the system bypass the service by overwriting the live state file. Keep decisions separate from execution results.
+Make the action sequence visible. Editing changes a draft. Saving retains a value. Submitting makes a decision available for processing. Applying it changes the task or produces a result. Combine buttons when appropriate, but label their actual effects. A receipt proves receipt, not completed work.
 
-Let the page retrieve updates without overwriting unsaved drafts. Show connection failures. Keep the service running through an available managed process and record its address and restart procedure with the task files. Saving through this pattern alone does not wake the system; pending input is read on a later conversation turn.
+Preserve decisions when regenerating the surface. Never overwrite unsaved edits during refresh. Reject or explicitly reconcile stale submissions. Process each submission once; if execution was interrupted and its outcome is uncertain, inspect the result before retrying.
 
-In Codex desktop, when available, `mcp__codex_app__open_in_codex` can open the local URL as a browser target with right placement. It opens the page; it does not provide the state connection. In other environments, use their supported browser or artifact-opening mechanism.
+Keep routine interaction deterministic where practical. Sorting or selecting should not invoke the model. Batch changes and involve the system when interpretation or further work is needed.
+
+## Continue the task
+
+State whether submission starts work automatically or waits for another conversation turn. On resuming work, read pending submissions before acting, apply authorized decisions, and return an acknowledgment or result to the same workbench. Record failures as failures and leave unfinished work identifiable.
+
+If conversation changes the underlying task, update the shared record and surface accordingly. Do not silently create competing versions of the work. Opening a surface or submitting a value does not authorize unrelated external actions.
+
+## Optional local pattern
+
+Serve a small HTML page and JSON state endpoints from the same loopback origin, bound to `127.0.0.1`. Restrict file access to the surface's files, validate input and write origins, and expose no arbitrary command execution.
+
+Route both browser and system updates through one revision-checked write path. Serialize updates and replace stored state atomically. Retrieve updates without erasing drafts, and show connection failures. Record the service address and restart procedure; saved files can survive after the service stops.
+
+In Codex desktop, use `mcp__codex_app__open_in_codex` to open the browser URL beside conversation when available. This opens the page; the local service provides the connection. Saving alone does not start a Codex turn. A local URL is not accessible to other readers merely because the conversation is shared.
 
 ## Validation tests
 
-Run these checks for each new connection and after changes affecting it. Use isolated test records and a harmless test action. Never test by executing a real external action. Reuse prior evidence for unchanged behavior instead of repeating a full suite for cosmetic edits.
+Test the actual chosen path with isolated records and harmless actions. Use browser tools when available; endpoint tests alone do not prove that interface controls work.
 
-| Test | Procedure and pass criterion |
+| Test | Pass criterion |
 | --- | --- |
-| Render and control | Open the actual surface and change a control. The visible value changes correctly; unrelated choices remain intact. For text fallback, verify an ID-based reply updates only the named record. |
-| Draft versus submission | Change a value without submitting. It is not recorded as a submitted decision or executed work. Save or submit explicitly and verify the indicated state matches the stored record. |
-| Round trip | Submit a unique test ID and value through the real input path. Read both through the system's path, record an acknowledgment, and confirm the surface shows that acknowledgment for the same submission. For manual exchange, test export, import, and the returned update. |
-| Continuity | Save choices, reload or reconstruct the surface, and verify those choices and IDs survive. Test a later session only if session persistence is claimed. For text fallback, reconstruct from the exported snapshot and state that the snapshot must be retained. |
-| Conflict handling | Submit two different edits based on the same revision. The second stale write is rejected or explicitly reconciled; it never silently erases the accepted edit. Manual imports must follow the same rule. |
-| Execution and replay | Submit a harmless action through the declared trigger path. Verify its result is recorded only after execution. Present the same submission again; completed work is not repeated. Mark this test not applicable if execution controls are absent. |
-| Failure feedback | Interrupt the connection or supply invalid input. The surface reports failure and preserves recoverable edits; it does not show a successful save or execution. For manual exchange, reject an invalid import without changing accepted state. |
+| Controls | Change a value in the actual interface. The intended record changes and unrelated choices remain intact. |
+| Submission boundary | Edit without submitting, then submit explicitly. The draft is not treated as submitted work; the accepted value and displayed status agree. |
+| Round trip | Submit a unique test ID and value. The system reads both, records an acknowledgment, and the surface displays it for that submission. Manual exchange includes export, import, and a returned update. |
+| Continuity | Save decisions, then reload or regenerate the surface. IDs and decisions survive. Test a new session separately before claiming persistence across sessions. |
+| Conflicts | Send different edits based on the same revision. The later stale edit is rejected or explicitly reconciled without silently losing the accepted edit. |
+| Execution | Process a harmless submitted action, then present it again. A result appears only after execution, and completed work is not repeated. |
+| Failure | Break the connection or supply invalid input. Failure is visible, accepted state remains intact, and recoverable edits are retained. |
 
-Record pass, fail, not tested, or not applicable for each check, with brief evidence and the tested revision. Fix failures in advertised capabilities before handover, or disable the affected feature and label the limitation. Never count an unavailable test as a pass.
+Record pass, fail, not tested, or not applicable, with brief evidence and the tested version. Execution tests may be inapplicable when there are no execution controls. For text fallback, test ID-based edits and snapshot reconstruction. For claimed simultaneous collaboration, test separate participant contexts against the same record.
 
-Use available browser tools according to their instructions. Server tests alone do not establish that browser interaction works. Shared multi-user behavior additionally requires testing two participant contexts against the same record; otherwise leave that capability unverified.
+Fix failed capabilities or disable and label them before handover. Never count an unavailable test as a pass. After later changes, rerun affected tests rather than the entire suite for cosmetic edits. Remove only isolated test records.
 
 ## Hand over
 
-Finish with the surface location, what its controls do, where decisions are retained, and whether further work starts automatically or on a later conversation turn. Keep the explanation short. Refer to the assistant as “the system.” Creating a surface does not authorize unrelated external actions.
+Provide the surface location, a short explanation of its controls, where decisions are retained, and what starts further system work. Summarize validation and any unverified capability. Refer to the assistant as “the system.”
