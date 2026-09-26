@@ -1,6 +1,6 @@
 # Generative Control Surfaces
 
-[Written in ChatGPT Codex, Using GPT-6 Astra Medium based on notes and skill file developed using Muse AI]
+`[Written in ChatGPT Codex, Using GPT-6 Astra Medium based on notes and skill file developed using Muse AI]`
 
 *Task-specific interfaces for directing ongoing AI work.*
 
