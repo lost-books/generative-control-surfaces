@@ -1,6 +1,7 @@
 ---
 Author: Written in ChatGPT Codex, Using GPT-6 Astra Medium 
 Sources: Based on notes & skill file developed using Muse AI
+Description: Overview of Generative Control Surfaces concept for creating persistent UI tools to aid working chat-based environments
 ---
 
 # Generative Control Surfaces
