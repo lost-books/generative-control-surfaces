@@ -1,7 +1,7 @@
 ---
-Author: Codex GPT-6 Astra Medium
-Name: generative-control-surface
-Description: Create a shared workbench for an ongoing AI task: generate useful controls, connect them to retained task state, and carry decisions back into the work. Invoke with CONTROL SURFACE or Generative Control Surface(s). Works with available chat, artifact, or workspace capabilities; Codex is optional. Use for directing ongoing work, not merely illustrating an answer.
+author: Codex GPT-6 Astra Medium
+name: generative-control-surface
+description: Create a shared workbench for an ongoing AI task: generate useful controls, connect them to retained task state, and carry decisions back into the work. Invoke with CONTROL SURFACE or Generative Control Surface(s). Works with available chat, artifact, or workspace capabilities; Codex is optional. Use for directing ongoing work, not merely illustrating an answer.
 ---
 
 # Generative Control Surface
