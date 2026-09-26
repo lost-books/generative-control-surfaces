@@ -6,7 +6,7 @@ author: Codex GPT-6 Astra Medium
 
 # Generative Control Surface
 
-Create a small interface that lets a person work directly with an ongoing task while continuing the conversation. Changes made through the interface must become available to the system through a clear, tested path. Conversation can also change the interface itself.
+Create a small interface that lets a person work directly with an ongoing task while continuing the conversation alongside it. Changes made through the interface must become available to the system through a clear, tested path. Conversation can also change the interface itself.
 
 The aim is less repeated explanation and more visible control. Build only what the current task needs. Preserve the work when the interface changes.
 
@@ -28,7 +28,7 @@ Use the smallest supported path:
 - Local workspace: use a local page and a small state service when filesystem access and process execution are available. See the local pattern below.
 - Graphical file with manual exchange: when automatic exchange is unavailable, create an interactive page or artifact that exports structured decisions with a submission ID and revision. Import them into the task and return an updated artifact or acknowledgment. Demonstrate the complete exchange and label it as manual.
 
-Every successful use of this skill produces a graphical interface with working controls. If the first path fails, inspect adjacent host mechanisms and test a minimal round trip through each plausible path before declaring the task blocked. Report the specific paths tested and their failures if no graphical route works. Do not substitute a text table for the requested surface.
+Every successful use of this skill produces a graphical interface with working controls. If the first path fails, inspect adjacent host mechanisms and test a minimal round trip through each plausible path before declaring the task blocked. Report the specific paths tested and their failures if no graphical route works. Do not substitute a text table or simulate non-functional UI elements for the requested surface.
 
 A shared conversation does not establish shared storage or simultaneous editing. Do not assume Codex, a docked panel, or a particular API exists in another host.
 
