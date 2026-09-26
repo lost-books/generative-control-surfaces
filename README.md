@@ -6,7 +6,7 @@ Description: Overview of Generative Control Surfaces concept for creating persis
 
 # Generative Control Surfaces
 
-*Task-specific interfaces for directing ongoing AI work.*
+***Task-specific interfaces for directing ongoing AI work.***
 
 Working with AI often means describing changes in messages: choose these options, move this item, keep that decision, run the next step. Conversation makes it easy to express intent, but becomes cumbersome when every adjustment requires another explanation.
 
