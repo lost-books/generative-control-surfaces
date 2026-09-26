@@ -1,7 +1,7 @@
 ---
-author: Muse AI
-name: "generative-control-surface"
-description: "Give the current task a docked control surface in the client's side panel: a live HTML readout dashboard, a two-way fullstack panel app, or both. Trigger when work needs a persistent visual surface beside chat that in-chat widgets cannot provide."
+Author: Muse AI
+Name: "generative-control-surface"
+Description: "Give the current task a docked control surface in the client's side panel: a live HTML readout dashboard, a two-way fullstack panel app, or both. Trigger when work needs a persistent visual surface beside chat that in-chat widgets cannot provide."
 ---
 
 # Generative Control Surface
