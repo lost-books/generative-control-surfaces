@@ -1,6 +1,6 @@
 ---
-author: Written in ChatGPT Codex, Using GPT-6 Astra Medium 
-sources: based on notes and skill file developed using Muse AI
+Author: Written in ChatGPT Codex, Using GPT-6 Astra Medium 
+Sources: Based on notes & skill file developed using Muse AI
 ---
 
 # Generative Control Surfaces
